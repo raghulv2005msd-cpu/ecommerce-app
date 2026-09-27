@@ -1,0 +1,29 @@
+<div class="page container">
+  <h1 class="page-title">My Orders</h1>
+
+  <p *ngIf="loading">Loading…</p>
+
+  <div class="card order-card" *ngFor="let order of orders">
+    <div class="order-header">
+      <div>
+        <span class="order-id">Order #{{ order.id }}</span>
+        <span class="order-date">{{ order.createdAt | date:'medium' }}</span>
+      </div>
+      <span [class]="statusClass(order.status)">{{ order.status }}</span>
+    </div>
+
+    <div class="order-item" *ngFor="let item of order.items">
+      <span>{{ item.product.name }} x{{ item.quantity }}</span>
+      <span>${{ (item.priceAtPurchase * item.quantity).toFixed(2) }}</span>
+    </div>
+
+    <div class="order-footer">
+      <span class="ship-to">Ship to: {{ order.shippingAddress }}</span>
+      <span class="order-total">Total: ${{ order.totalAmount.toFixed(2) }}</span>
+    </div>
+  </div>
+
+  <p *ngIf="!loading && !orders.length">
+    You haven't placed any orders yet. <a routerLink="/products">Start shopping</a>
+  </p>
+</div>

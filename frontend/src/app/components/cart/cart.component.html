@@ -1,0 +1,27 @@
+<div class="page container">
+  <h1 class="page-title">Your Cart</h1>
+
+  <div *ngIf="cartService.cartItems().length; else emptyCart">
+    <div class="card cart-item" *ngFor="let item of cartService.cartItems()">
+      <img [src]="item.product.imageUrl || 'https://placehold.co/80x80?text=No+Image'" class="thumb" [alt]="item.product.name">
+      <div class="info">
+        <p class="name">{{ item.product.name }}</p>
+        <p class="unit-price">${{ item.product.price.toFixed(2) }} each</p>
+      </div>
+      <div class="qty">Qty: {{ item.quantity }}</div>
+      <div class="line-total">${{ (item.product.price * item.quantity).toFixed(2) }}</div>
+      <button class="btn btn-outline" (click)="removeItem(item.id)">Remove</button>
+    </div>
+
+    <div class="summary card">
+      <span>Total</span>
+      <span class="total-amount">${{ cartService.cartTotal().toFixed(2) }}</span>
+    </div>
+
+    <a routerLink="/checkout" class="btn btn-primary checkout-btn">Proceed to checkout</a>
+  </div>
+
+  <ng-template #emptyCart>
+    <p>Your cart is empty. <a routerLink="/products">Browse products</a></p>
+  </ng-template>
+</div>

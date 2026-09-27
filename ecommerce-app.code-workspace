@@ -1,0 +1,29 @@
+{
+  "folders": [
+    { "name": "backend (Spring Boot)", "path": "backend" },
+    { "name": "frontend (Angular)", "path": "frontend" },
+    { "name": "root", "path": "." }
+  ],
+  "settings": {
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "editor.formatOnSave": true,
+    "files.exclude": {
+      "**/target": true,
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.angular": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "vscjava.vscode-java-pack",
+      "vmware.vscode-spring-boot",
+      "vscjava.vscode-spring-boot-dashboard",
+      "angular.ng-template",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "editorconfig.editorconfig",
+      "msjsdiag.debugger-for-chrome"
+    ]
+  }
+}

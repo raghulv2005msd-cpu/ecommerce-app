@@ -1,0 +1,35 @@
+<div class="page container">
+  <div class="page-header">
+    <h1 class="page-title">Shop our products</h1>
+    <div class="search-box">
+      <input class="input" placeholder="Search products…" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()">
+      <button class="btn btn-primary" (click)="onSearch()">Search</button>
+    </div>
+  </div>
+
+  <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+  <p *ngIf="loading">Loading products…</p>
+
+  <div class="grid" *ngIf="!loading && products.length">
+    <div class="card product-card" *ngFor="let product of products">
+      <a [routerLink]="['/products', product.id]">
+        <img [src]="product.imageUrl || 'https://placehold.co/300x220?text=No+Image'" [alt]="product.name" class="product-img">
+      </a>
+      <div class="product-body">
+        <a [routerLink]="['/products', product.id]" class="product-name">{{ product.name }}</a>
+        <p class="product-category">{{ product.category }}</p>
+        <div class="product-footer">
+          <span class="price">${{ product.price.toFixed(2) }}</span>
+          <button
+            class="btn btn-primary"
+            [disabled]="product.stockQuantity === 0 || addingId === product.id"
+            (click)="addToCart(product)">
+            {{ product.stockQuantity === 0 ? 'Out of stock' : (addingId === product.id ? 'Adding…' : 'Add to cart') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="!loading && !products.length && !errorMessage">No products found.</p>
+</div>

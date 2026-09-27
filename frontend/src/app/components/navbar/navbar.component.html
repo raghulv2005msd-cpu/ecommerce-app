@@ -1,0 +1,27 @@
+<header class="navbar">
+  <div class="container navbar-inner">
+    <a routerLink="/products" class="brand">🛍️ ShopSphere</a>
+
+    <nav class="links">
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a *ngIf="authService.isAdmin()" routerLink="/admin/products" routerLinkActive="active">Manage Products</a>
+      <a *ngIf="authService.isLoggedIn()" routerLink="/orders" routerLinkActive="active">My Orders</a>
+    </nav>
+
+    <div class="actions">
+      <a routerLink="/cart" class="cart-link" *ngIf="authService.isLoggedIn()">
+        🛒 Cart
+        <span class="badge" *ngIf="cartService.itemCount() > 0">{{ cartService.itemCount() }}</span>
+      </a>
+
+      <ng-container *ngIf="authService.isLoggedIn(); else guestLinks">
+        <span class="user-name">Hi, {{ authService.currentUser()?.fullName }}</span>
+        <button class="btn btn-outline" (click)="logout()">Log out</button>
+      </ng-container>
+      <ng-template #guestLinks>
+        <a routerLink="/login" class="btn btn-outline">Log in</a>
+        <a routerLink="/register" class="btn btn-primary">Sign up</a>
+      </ng-template>
+    </div>
+  </div>
+</header>

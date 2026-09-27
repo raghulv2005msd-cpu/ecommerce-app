@@ -1,0 +1,32 @@
+<div class="page container">
+  <a routerLink="/products" class="back-link">&larr; Back to products</a>
+
+  <p *ngIf="loading">Loading…</p>
+  <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+
+  <div class="detail card" *ngIf="product">
+    <img [src]="product.imageUrl || 'https://placehold.co/500x400?text=No+Image'" [alt]="product.name" class="detail-img">
+    <div class="detail-body">
+      <h1>{{ product.name }}</h1>
+      <p class="category">{{ product.category }}</p>
+      <p class="price">${{ product.price.toFixed(2) }}</p>
+      <p class="description">{{ product.description }}</p>
+      <p class="stock" [class.low]="product.stockQuantity < 5">
+        {{ product.stockQuantity > 0 ? product.stockQuantity + ' in stock' : 'Out of stock' }}
+      </p>
+
+      <div class="add-row" *ngIf="product.stockQuantity > 0">
+        <input
+          class="input qty-input"
+          type="number"
+          min="1"
+          [max]="product.stockQuantity"
+          [(ngModel)]="quantity">
+        <button class="btn btn-primary" [disabled]="adding" (click)="addToCart()">
+          {{ adding ? 'Adding…' : 'Add to cart' }}
+        </button>
+      </div>
+      <p class="success-text" *ngIf="addedMessage">{{ addedMessage }}</p>
+    </div>
+  </div>
+</div>

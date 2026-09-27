@@ -1,0 +1,12 @@
+.back-link { display: inline-block; margin-bottom: 16px; font-weight: 600; }
+.detail { display: flex; gap: 32px; padding: 24px; flex-wrap: wrap; }
+.detail-img { width: 360px; max-width: 100%; border-radius: 8px; object-fit: cover; }
+.detail-body { flex: 1; min-width: 260px; }
+.category { color: var(--color-muted); font-size: 13px; }
+.price { font-size: 26px; font-weight: 800; margin: 8px 0; }
+.description { color: var(--color-text); line-height: 1.5; }
+.stock { font-size: 13px; color: #067647; font-weight: 600; }
+.stock.low { color: #b54708; }
+.add-row { display: flex; gap: 10px; margin-top: 16px; align-items: center; }
+.qty-input { width: 80px; }
+.success-text { color: #067647; font-weight: 600; margin-top: 10px; }
